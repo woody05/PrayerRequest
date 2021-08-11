@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ title }} {{ p_request.title }}?</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="header-buttons">
+                <div class="button-row">
+                    <button id="btn-delete" class="btn btn-success">Delete</button>
+                    <a href="{{ url_for('home') }}"><button class="btn btn-danger">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <!--<form action="{{ url }}" method="post">-->
+    <input id="prayer-request-id" type="text" name="id" value="{{ p_request.prayer_request_id }}" hidden>
+    <div class="row">
+        <div class="col-sm-7">
+            <h3>Description</h3>
+            <p>{{ p_request.description }}</p>
+        </div>
+        <div class="col-sm-5">
+            <h3>Basic Information</h3>
+            <p><label>Added By:</label> {{ p_request.added_by }}</p>
+            <p><label>Date created:</label> {{ p_request.date_added }}</p>
+
+            {% if p_request.is_answered == 0 %}
+            <p><label>Status:</label> Not Answered</p>
+            {% else %}
+            <p><label>Answered:</label> Answered!</p>
+            {% endif %}
+
+            {% if p_request.is_answered == 1 %}
+            <p><label>Date answered:</label> {{ p_request.date_answered }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <!--<div class="row">
+            <div class="col-sm-12">
+                <div class="button-row">
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>-->
+</div>
+
+<script>
+    //KAW going to post form.
+    $('#btn-delete').click(function () {
+        console.log('shit');
+        //KAW collecting variables
+        var id = $("#prayer-request-id").val();
+        console.log(id);
+        data = {
+            id: id,
+        };
+
+        var url = "{{ url_for('removePrayerRequest') }}"
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                window.location.href = "{{ url_for('home') }}";
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('Aw shit it broke!');
+            },
+         });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="header-buttons">
+                <div class="button-row">
+                    <button id="btn-add" class="btn btn-success">Add</button>
+                    <a href="{{ url_for('home') }}"><button class="btn btn-danger">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+        <div class="title-row">
+            <label>Title</label>
+            <input id="title" class="form-control" type="text" , name="title" />
+        </div>
+        <div class="description-row">
+            <label>Description</label>
+            <!--<input id="description" class="form-control" type="text" , name="description" />-->
+            <textarea class="form-control" id="description" rows="6"></textarea>
+        </div>
+        <div class="name-row">
+            <label>Your Name</label>
+            <input id="person" class="form-control" type="text" , name="person" />
+        </div>
+</div>
+
+<script>
+    //KAW going to post form.
+    $('#btn-add').click(function () {
+        console.log('shit');
+        //KAW collecting variables
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var person = $("#person").val();
+
+        data = {
+            title: title,
+            description: description,
+            person: person
+        };
+
+        var url = "{{ url_for('addPrayerRequest') }}"
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                window.location.href = "{{ url_for('home') }}";
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('aw shit it broke!');
+            },
+         });
+    });
+</script>
+
+{% endblock %}
+

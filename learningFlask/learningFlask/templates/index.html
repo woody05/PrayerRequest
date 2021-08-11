@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ header }}</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="header-buttons">
+                <div class="button-row">
+                    <a href="{{ url_for('addPrayerRequest') }}"><button class="btn btn-success">New Request</button></a>
+                    <button id="btn-view" class="btn btn-primary">View</button>
+                    <button id="btn-delete" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-filters">
+    <form action="{{ url_for('home') }}" method="post">
+        <div class="row">
+            <div class="col-sm-3">
+                <input id="prayer-search" type="text" class="form-control" placeholder="Prayer Request Title" name="search" />
+            </div>
+            <div class="col-sm-3">
+                <input id="prayer-search-desc" type="text" class="form-control" placeholder="Prayer Request Description" name="searchDesc" />
+            </div>
+            <div class="col-sm-3">
+                <select class="form-control" aria-label="All" name="status">
+                    <option value="1">All</option>
+                    <option value="2">Answered</option>
+                    <option value="3">Unanswered</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <button id="btn-search" class="btn btn-success">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="prayer-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in prayer_requests %}
+                    <tr id="{{ request.prayer_request_id }}">
+                        <td>{{ request.title }}</td>
+                        <td>{{ request.description }}</td>
+                        <td>{{ request.date_added }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var first_row = $("table > tbody > tr")[0].id;
+    var selected_row = first_row;
+
+    $(function () {
+        SetSelectedRow(selected_row);
+	});
+
+    function SetSelectedRow(id) {
+        selected_row = id;
+        var rows = $("table > tbody > tr").removeAttr("class", "selected-row");
+        $("#" + id).attr("class", "selected-row");
+        console.log("selected:" + selected_row);
+    }
+
+    $('table').on('click', 'tr', function(){
+	    id= $( this ).attr('id');
+        SetSelectedRow(id);
+    });
+
+    $("#btn-view").click(function () {
+
+        //KAW collecting variables
+        var id = selected_row;
+        console.log(id);
+        data = {
+            id: id,
+        };
+
+        var url = "{{ url_for('viewPrayerRequest') }}"
+        window.location.href = url+"/"+id;
+
+    });
+
+    $("#btn-delete").click(function () {
+
+        //KAW collecting variables
+        var id = selected_row;
+        console.log(id);
+        data = {
+            id: id,
+        };
+
+        var url = "{{ url_for('deletePrayerRequest') }}"
+        window.location.href = url+"/"+id;
+
+    });
+
+</script>
+
+{% endblock %}

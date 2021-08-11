@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ title }} - {{ p_request.title }}</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="header-buttons">
+                <div class="button-row">
+                    <button id="btn-save" class="btn btn-success">Save</button>
+                    <a href="{{ url_for('home') }}"><button class="btn btn-danger">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-7">
+            <h3>Description</h3>
+            <textarea class="form-control" id="description" name="description" rows="6">{{ p_request.description }}</textarea>
+        </div>
+        <div class="col-sm-5">
+            <h3>Basic Information</h3>
+            <p><label>Added By:</label><input id="added-by" name="added-by" class="form-control" type="text" value="{{ p_request.added_by }}" /></p>
+            <p><label>Date created:</label><input id="date-added" name="date-added" class="form-control" type="date" value="{{ p_request.date_added }}" /></p>
+
+            <label>Status:</label>
+            <select id="status" class="form-control" aria-label="status" name="status">
+                {% if p_request.is_answered == 0 %}
+                <option value="0" selected>Not Answerd</option>
+                <option value="1">Answered</option>
+                {% else %}
+                <option value="0">Not Answerd</option>
+                <option value="1" selected>Answered</option>
+                {% endif %}
+            </select>
+
+            <p><label>Date answered:</label><input id="date-answered" name="date-added" class="form-control" type="date" value="{{ p_request.date_answered }}" /></p>
+        
+        </div>
+    </div>
+</div>
+
+<script>
+    //KAW going to post form.
+    $('#btn-save').click(function () {
+        console.log('shit');
+        //KAW collecting variables
+        var id = "{{ p_request.prayer_request_id }}"
+        var description = $("#description").val();
+        var addedby = $("#added-by").val();
+        var dateadded = $("#date-added").val();
+        var status = $("#status").val();
+
+        var dateAnswered = $("#date-answered").val();
+
+        if (status == 1 && dateAnswered == '') {
+            var today = new Date();
+            var formattedDate = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDay()
+            dateAnswered = formattedDate;
+        }
+
+        data = {
+            id: id,
+            description: description,
+            addedby: addedby,
+            dateadded: dateadded,
+            status: status,
+            dateAnswered: dateAnswered
+        };
+
+        var url = "{{ url_for('updatePrayerRequest') }}"
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                window.location.href = "{{ url_for('home') }}";
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('Aw shit it broke!');
+            },
+         });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>dc2ebf2f-b2f7-4e7b-9aa0-4c65e480b510</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>learningFlask</Name>
+    <RootNamespace>learningFlask</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="learningFlask\models\category.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learningFlask\models\prayer_request.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runserver.py" />
+    <Compile Include="learningFlask\__init__.py" />
+    <Compile Include="learningFlask\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="learningFlask\" />
+    <Folder Include="learningFlask\models\" />
+    <Folder Include="learningFlask\static\" />
+    <Folder Include="learningFlask\static\content\" />
+    <Folder Include="learningFlask\static\fonts\" />
+    <Folder Include="learningFlask\static\scripts\" />
+    <Folder Include="learningFlask\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="learningFlask\templates\editPrayerRequest.html" />
+    <Content Include="learningFlask\templates\viewPrayerRequest.html" />
+    <Content Include="learningFlask\templates\deletePrayerRequest.html" />
+    <Content Include="learningFlask\templates\addPrayerRequest.html" />
+    <Content Include="learningFlask\templates\unansweredPrayerRequest.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="learningFlask\static\content\bootstrap.css" />
+    <Content Include="learningFlask\static\content\bootstrap.min.css" />
+    <Content Include="learningFlask\static\content\site.css" />
+    <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="learningFlask\static\scripts\bootstrap.js" />
+    <Content Include="learningFlask\static\scripts\bootstrap.min.js" />
+    <Content Include="learningFlask\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="learningFlask\static\scripts\jquery-1.10.2.js" />
+    <Content Include="learningFlask\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="learningFlask\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="learningFlask\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="learningFlask\static\scripts\jquery.validate.js" />
+    <Content Include="learningFlask\static\scripts\jquery.validate.min.js" />
+    <Content Include="learningFlask\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="learningFlask\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="learningFlask\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="learningFlask\static\scripts\respond.js" />
+    <Content Include="learningFlask\static\scripts\respond.min.js" />
+    <Content Include="learningFlask\static\scripts\_references.js" />
+    <Content Include="learningFlask\templates\about.html" />
+    <Content Include="learningFlask\templates\contact.html" />
+    <Content Include="learningFlask\templates\index.html" />
+    <Content Include="learningFlask\templates\layout.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
