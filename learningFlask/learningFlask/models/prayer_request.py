@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
 from datetime import datetime
-from datatables import ColumnDT, DataTables
+#from datatables import ColumnDT, DataTables
 
 Base = declarative_base()
 
@@ -36,23 +36,6 @@ def prayer_request_by_id(id):
     result = prayer_request.query.filter_by(prayer_request_id=id).first()
     return result
 
-
-def unAnswered_prayer_request_datatables(request):
-    data = unanswered_prayer_request()
-    params = request.args
-
-    columns = []
-    columns.append(ColumnDT(prayer_request.title))
-    #columns.append(ColumnDT(text("prayer_request.description")))
-    #columns.append(ColumnDT(text('prayer_request.is_answered')))
-    #columns.append(ColumnDT(text('prayer_request.added_by')))
-    #columns.append(ColumnDT(text('prayer_request.date_added')))
-    #columns.append(ColumnDT(text('prayer_request.date_answered')))
-    #columns.append(ColumnDT(text('prayer_request.category_id')))
-
-    rowTable = DataTables(params, data, columns)
-
-    return rowTable
 
 
 def remove_prayer_request(id):

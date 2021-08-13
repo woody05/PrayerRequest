@@ -48,10 +48,11 @@
     <div class="col-sm-12">
         <div class="prayer-container">
             <table class="table">
-                <thead>
+                <thead class="table-header">
                     <tr>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Status</th>
                         <th>Added</th>
                     </tr>
                 </thead>
@@ -60,6 +61,11 @@
                     <tr id="{{ request.prayer_request_id }}">
                         <td>{{ request.title }}</td>
                         <td>{{ request.description }}</td>
+                        {% if request.is_answered == 0 %}
+                        <td class="unanswered">Unanswered</td>
+                        {% else %}
+                        <td class="answered">Answered</td>
+                        {% endif %}
                         <td>{{ request.date_added }}</td>
                     </tr>
                     {% endfor %}
