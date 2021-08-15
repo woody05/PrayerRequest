@@ -31,6 +31,14 @@
             <!--<input id="description" class="form-control" type="text" , name="description" />-->
             <textarea class="form-control" id="description" rows="6"></textarea>
         </div>
+        <div class="category-row">
+            <label>Category:</label>
+            <select id="category" class="form-control" aria-label="category" name="category">
+                {% for category in categories %}
+                <option value="{{ category.category_id }}">{{ category.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="name-row">
             <label>Your Name</label>
             <input id="person" class="form-control" type="text" , name="person" />
@@ -40,16 +48,18 @@
 <script>
     //KAW going to post form.
     $('#btn-add').click(function () {
-        console.log('shit');
+        
         //KAW collecting variables
         var title = $("#title").val();
         var description = $("#description").val();
         var person = $("#person").val();
+        var category_id = $("#category").val();
 
         data = {
             title: title,
             description: description,
-            person: person
+            person: person,
+            category_id : category_id
         };
 
         var url = "{{ url_for('addPrayerRequest') }}"

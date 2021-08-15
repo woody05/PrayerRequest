@@ -16,7 +16,10 @@ class prayer_request(db.Model):
     added_by = db.Column("Add_By",db.Text, nullable=False)
     date_added = db.Column("Date_Added",db.DateTime, nullable=False)
     date_answered = db.Column("Date_Answered",db.DateTime, nullable=False)
-    category_id = db.Column("Category_id", db.Integer, nullable=False)
+    
+    category_id = db.Column("Category_id", db.Integer, ForeignKey("category.Category_id"))
+    _category = relationship("category")
+
 
 def all_prayer_request():
     result = prayer_request.query
@@ -49,6 +52,8 @@ def update_prayer_request(updatedData):
     result.added_by = updatedData.added_by
     result.date_added = updatedData.date_added
     result.is_answered = updatedData.is_answered
+    result.category_id = updatedData.category_id
+
 
     if updatedData.date_answered != None and updatedData.date_answered != '':
         result.date_answered = updatedData.date_answered
@@ -60,13 +65,13 @@ def update_prayer_request(updatedData):
 
     db.session.commit()
 
-def add_prayer_request(title,description,person):
+def add_prayer_request(title,description,person,category_id):
    newRequest = prayer_request()
    newRequest.title = title
    newRequest.description = description
    newRequest.is_answered = 0
    newRequest.added_by = person
-   newRequest.category = 1
+   newRequest.category_id = category_id
    newRequest.date_added = datetime.now()
    newRequest.date_answered = None
 

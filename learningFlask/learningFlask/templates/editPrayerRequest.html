@@ -22,14 +22,26 @@
 
 <div class="content">
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-6">
             <h4 class="section-header">Description</h4>
             <textarea class="form-control" id="description" name="description" rows="6">{{ p_request.description }}</textarea>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
             <h4 class="section-header">Basic Information</h4>
             <p><label>Added By:</label><input id="added-by" name="added-by" class="form-control" type="text" value="{{ p_request.added_by }}" /></p>
             <p><label>Date created:</label><input id="date-added" name="date-added" class="form-control" type="date" value="{{ p_request.date_added }}" /></p>
+
+            <label>Category:</label>
+            <select id="category" class="form-control" aria-label="category" name="category">
+                {% for category in categories %}
+                {% if p_request._category.category_id == category.category_id %}
+                <option value="{{ category.category_id }}" selected>{{ category.title }}</option>
+                {% else %}
+                <option value="{{ category.category_id }}">{{ category.title }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
 
             <label>Status:</label>
             <select id="status" class="form-control" aria-label="status" name="status">
@@ -43,7 +55,7 @@
             </select>
 
             <p><label>Date answered:</label><input id="date-answered" name="date-added" class="form-control" type="date" value="{{ p_request.date_answered }}" /></p>
-        
+
         </div>
     </div>
 </div>
@@ -58,6 +70,7 @@
         var addedby = $("#added-by").val();
         var dateadded = $("#date-added").val();
         var status = $("#status").val();
+        var category_id = $("#category").val();
 
         var dateAnswered = $("#date-answered").val();
 
@@ -73,7 +86,8 @@
             addedby: addedby,
             dateadded: dateadded,
             status: status,
-            dateAnswered: dateAnswered
+            dateAnswered: dateAnswered,
+            category_id: category_id,
         };
 
         var url = "{{ url_for('updatePrayerRequest') }}"

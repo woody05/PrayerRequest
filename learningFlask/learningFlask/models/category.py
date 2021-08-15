@@ -10,8 +10,7 @@ class category(db.Model):
     category_id = db.Column('Category_id', db.Integer, primary_key = True)
     title = db.Column("Title", db.String(50))
 
-class category(SQLAlchemyAutoSchema):
-    class Meta:
-        model = category
-        include_relationships = True
-        load_instance = True
+
+def all_categories():
+    result = category.query.order_by(category.title.asc())
+    return result
