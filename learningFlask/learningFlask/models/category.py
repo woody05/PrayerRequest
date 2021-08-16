@@ -2,7 +2,6 @@
 from learningFlask import db
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 Base = declarative_base()
 
