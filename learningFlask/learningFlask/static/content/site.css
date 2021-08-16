@@ -60,6 +60,10 @@ input[type="checkbox"].input-validation-error {
     padding: 3vh 0;
 }
 
+.prayer-request-table tbody tr:hover {
+    background-color: #D3D3D3;
+}
+
 .selected-row {
     background-color: #D3D3D3;
 }

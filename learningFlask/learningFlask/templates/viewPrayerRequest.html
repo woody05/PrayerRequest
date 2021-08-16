@@ -52,7 +52,7 @@
         <div class="col-sm-6">
             <h4 class="section-header">Comments</h4>
             <div class="col-sm-10">
-                <textarea class="form-control" id="request-comment" name="request-comment" rows="2"></textarea>
+                <textarea class="form-control" id="request-comment" name="request-comment" rows="2" placeholder="Enter comment for this prayer request"></textarea>
             </div>
             <div class="col-sm-2">
                 <button id="btn-add-comment" class="btn btn-success">Add</button>
@@ -65,18 +65,23 @@
 </div>
 
 <script>
-        $("#btn-edit").click(function () {
+    $("#btn-edit").click(function () {
 
-        //KAW collecting variables
-        var id = "{{ p_request.prayer_request_id }}"
-        console.log(id);
-        data = {
-            id: id,
-        };
+            //KAW collecting variables
+            var id = "{{ p_request.prayer_request_id }}"
+            console.log(id);
+            data = {
+                id: id,
+            };
 
-        var url = "{{ url_for('editPrayerRequest') }}"
-        window.location.href = url+"/"+id;
+            var url = "{{ url_for('editPrayerRequest') }}"
+            window.location.href = url+"/"+id;
 
+    });
+
+    $('#btn-add-comment').click(function () {
+        var comment = $('#request-comment').val();
+        alert('Sorry this feature is NOT implemented yet.\n' + 'Comment: "' + comment + '" was not added')
     });
 </script>
 
