@@ -6,7 +6,6 @@ from datetime import datetime
 from flask import render_template, redirect, url_for, request, jsonify
 from learningFlask import app
 from .models import prayer_request, category
-#from datatables import ColumnDT, DataTables
 from sqlalchemy.sql import text
 
 @app.route('/')

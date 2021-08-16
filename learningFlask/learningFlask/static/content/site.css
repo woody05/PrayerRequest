@@ -13,8 +13,23 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    //max-width: 280px;
 }
+
+hr {
+    height: 1px;
+    background-color: #444;
+    border: none;
+}
+
+/*
+    Nav bar 
+*/
+
+.navbar-nav{
+    float: right;
+}
+
 
 /* styles for validation helpers */
 .field-validation-error {
@@ -50,7 +65,6 @@ input[type="checkbox"].input-validation-error {
 }
 
 .header-row{
-    background-color: lightblue;
     height: auto;
 }
 

@@ -30,7 +30,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <!--<li><a href="{{ url_for('home') }}">Home</a></li>-->
-
+                    <!--Display User Name if logged in. Not working yet. Have to figureout sessions with Python-->
+                    {% if false %}
+                        <li><a href="{{ url_for('home') }}">Woody05</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('home') }}">Sign In</a></li>
+                        <li><a href="{{ url_for('home') }}">Create Account</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
