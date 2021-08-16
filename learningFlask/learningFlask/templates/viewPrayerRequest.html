@@ -51,6 +51,14 @@
     <div class="row">
         <div class="col-sm-6">
             <h4 class="section-header">Comments</h4>
+            <div class="comments-list">
+                {% for comment in p_request.comments %}
+                <div class="comment-container">
+                    <label>{{ comment.date_added}} - {{ comment.user_id }}</label>
+                    <p class="comment-text">{{ comment._comment}}</p>
+                </div>
+                {% endfor %}
+            </div>
             <div class="col-sm-10">
                 <textarea class="form-control" id="request-comment" name="request-comment" rows="2" placeholder="Enter comment for this prayer request"></textarea>
             </div>

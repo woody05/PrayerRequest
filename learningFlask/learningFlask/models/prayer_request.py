@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
 from datetime import datetime
+from . import comment
 #from datatables import ColumnDT, DataTables
 
 Base = declarative_base()
@@ -19,6 +20,8 @@ class prayer_request(db.Model):
     
     category_id = db.Column("Category_id", db.Integer, ForeignKey("category.Category_id"))
     _category = relationship("category")
+
+    comments = relationship("comments", back_populates="prayer_request")
 
 
 def all_prayer_request():

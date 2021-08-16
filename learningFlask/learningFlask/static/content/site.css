@@ -30,8 +30,15 @@ hr {
     float: right;
 }
 
+/*
+    End Nav bar
+*/
+
 
 /* styles for validation helpers */
+/*
+    Form controls
+*/
 .field-validation-error {
     color: #b94a48;
 }
@@ -59,6 +66,15 @@ input[type="checkbox"].input-validation-error {
 .button-row{
     padding: 3vh 0;
 }
+
+.input-row{
+    margin: 3% 0;
+}
+
+
+/*
+    End From Controls
+*/
 
 .prayer-request-table tbody tr:hover {
     background-color: #D3D3D3;
@@ -100,3 +116,17 @@ input[type="checkbox"].input-validation-error {
 .header-buttons{
     float: right;
 }
+
+/*
+    Prayer Request comments sections
+*/
+
+.comment-container{
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    margin: 0 0 5px 0;
+}
+
+/*
+    End Prayer Request comments sections
+*/

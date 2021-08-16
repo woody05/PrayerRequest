@@ -27,6 +27,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="learningFlask\models\comment.py" />
     <Compile Include="learningFlask\models\category.py">
       <SubType>Code</SubType>
     </Compile>
@@ -47,6 +48,7 @@
     <Folder Include="learningFlask\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="learningFlask\templates\createAccount.html" />
     <Content Include="learningFlask\templates\editPrayerRequest.html" />
     <Content Include="learningFlask\templates\viewPrayerRequest.html" />
     <Content Include="learningFlask\templates\deletePrayerRequest.html" />

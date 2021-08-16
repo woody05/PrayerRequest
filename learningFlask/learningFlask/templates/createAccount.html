@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="header-buttons">
+                <div class="button-row">
+                    <button id="btn-add" class="btn btn-success">Create</button>
+                    <a href="{{ url_for('home') }}"><button class="btn btn-danger">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="section-header">Account Info</h4>
+        <div class="input-row">
+            <input id="Email" class="form-control" name="Email" type="email" placeholder="Enter Email Address." />
+        </div>
+        <div class="input-row">
+            <input id="user-name" class="form-control" name="user-name" type="text" placeholder="Enter User Name." />
+        </div>
+        <div class="input-row">
+            <input id="password" class="form-control" name="password" type="password" placeholder="Enter Password." />
+        </div>
+        <div class="input-row">
+            <input id="repassword" class="form-control" name="repassword" type="password" placeholder="Re-Enter Password." />
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <h4 class="section-header">Person Info</h4>
+        <div class="input-row">
+            <input id="first-name" class="form-control" name="first-name" type="text" placeholder="Enter First Name." />
+        </div>
+        <div class="input-row">
+            <input id="last-name" class="form-control" name="last-name" type="text" placeholder="Enter Last Name." />
+        </div>
+        <div class="input-row">
+            <input id="age" class="form-control" name="age" type="number" placeholder="Enter Age." />
+        </div>
+        <div class="input-row">
+            <select id="category" class="form-control" aria-label="category" name="category">
+                <option value="male" selected>Male</option>
+                <option value="female">Female</option>
+                <option value="Unspecified">Unspecified</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <h4 class="section-header">Location Info</h4>
+        <div class="input-row">
+            <input id="address" class="form-control" name="address" type="text" placeholder="Enter Address." />
+        </div>
+        <div class="input-row">
+            <input id="city" class="form-control" name="city" type="text" placeholder="Enter City." />
+        </div>
+        <div class="input-row">
+            <input id="state" class="form-control" name="state" type="text" placeholder="Enter State." />
+        </div>
+        <div class="input-row">
+            <input id="zip" class="form-control" name="zip" type="text" placeholder="Enter Zip Code." />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="section-header">Options</h4>
+        <div class="input-row">
+            <input type="checkbox" id="receiveEmails" name="receiveEmails" value="1">
+            <label for="receiveEmails">Receive Emails</label><br>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"></div>
+</div>
+
+<script>
+    $(function() {
+        var receiveEmails = $('#receiveEmails');
+
+        receiveEmails.prop('checked', true);
+    });
+</script>
+
+{% endblock %}

@@ -8,6 +8,17 @@ from learningFlask import app
 from .models import prayer_request, category
 from sqlalchemy.sql import text
 
+
+@app.route('/createAccount',methods = ['POST', 'GET'])
+def createAccount():
+    return render_template(
+        'createAccount.html',
+        title='Create Account',
+        header='Create Account',
+        year=datetime.now().year,
+    )
+
+
 @app.route('/')
 @app.route('/home',methods = ['POST', 'GET'])
 def home():
