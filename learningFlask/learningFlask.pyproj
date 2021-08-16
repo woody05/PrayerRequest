@@ -27,6 +27,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="learningFlask\models\users.py" />
     <Compile Include="learningFlask\models\comment.py" />
     <Compile Include="learningFlask\models\category.py">
       <SubType>Code</SubType>

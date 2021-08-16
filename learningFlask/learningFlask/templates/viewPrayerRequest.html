@@ -54,7 +54,7 @@
             <div class="comments-list">
                 {% for comment in p_request.comments %}
                 <div class="comment-container">
-                    <label>{{ comment.date_added}} - {{ comment.user_id }}</label>
+                    <label>{{ comment.date_added}} - {{ comment.users.user_name }}</label>
                     <p class="comment-text">{{ comment._comment}}</p>
                 </div>
                 {% endfor %}

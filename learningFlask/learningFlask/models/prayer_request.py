@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
 from datetime import datetime
-from . import comment
+from . import comment,users
 #from datatables import ColumnDT, DataTables
 
 Base = declarative_base()
