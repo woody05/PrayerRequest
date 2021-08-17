@@ -88,8 +88,30 @@
     });
 
     $('#btn-add-comment').click(function () {
+        //var comment = $('#request-comment').val();
+        //alert('Sorry this feature is NOT implemented yet.\n' + 'Comment: "' + comment + '" was not added')
+        var prayer_request_id = "{{ p_request.prayer_request_id }}"
         var comment = $('#request-comment').val();
-        alert('Sorry this feature is NOT implemented yet.\n' + 'Comment: "' + comment + '" was not added')
+
+        data = {
+            prayer_request_id: prayer_request_id,
+            comment: comment,
+        };
+
+        var url = "{{ url_for('addPrayerRequestComment') }}"
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                window.location.href = "{{ url_for('viewPrayerRequest') }}/"+prayer_request_id;
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log('aw shit it broke!');
+            },
+         });
     });
 </script>
 

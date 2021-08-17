@@ -5,7 +5,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, redirect, url_for, request, jsonify
 from learningFlask import app
-from .models import prayer_request, category
+from .models import prayer_request, category, comment
 from sqlalchemy.sql import text
 
 
@@ -174,3 +174,17 @@ def about():
         year=datetime.now().year,
         message='Your application description page.',
     )
+
+
+@app.route('/addPrayerRequestComment',methods = ['POST', 'GET'])
+def addPrayerRequestComment():
+    if request.method == 'POST':
+        newComment = comment.comments()
+        newComment.date_added = datetime.now()
+        newComment._comment = request.form['comment']
+        newComment.user_id = 1
+        newComment.prayer_request_id = request.form['prayer_request_id']
+
+        comment.add_comment(newComment)
+
+        return redirect(url_for('home'))
