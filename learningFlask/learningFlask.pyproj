@@ -49,6 +49,7 @@
     <Folder Include="learningFlask\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="learningFlask\templates\signIn.html" />
     <Content Include="learningFlask\templates\createAccount.html" />
     <Content Include="learningFlask\templates\editPrayerRequest.html" />
     <Content Include="learningFlask\templates\viewPrayerRequest.html" />

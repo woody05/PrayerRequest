@@ -9,6 +9,15 @@ from .models import prayer_request, category, comment
 from sqlalchemy.sql import text
 
 
+@app.route('/signIn',methods = ['POST', 'GET'])
+def signIn():
+    return render_template(
+        'signIn.html',
+        title='Sign In',
+        header='Sign In',
+        year=datetime.now().year,
+    )
+
 @app.route('/createAccount',methods = ['POST', 'GET'])
 def createAccount():
     return render_template(
@@ -17,7 +26,6 @@ def createAccount():
         header='Create Account',
         year=datetime.now().year,
     )
-
 
 @app.route('/')
 @app.route('/home',methods = ['POST', 'GET'])
