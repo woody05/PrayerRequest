@@ -33,7 +33,7 @@
             <p><label>Date created:</label><input id="date-added" name="date-added" class="form-control" type="date" value="{{ p_request.date_added }}" /></p>
 
             <label>Category:</label>
-            <select id="category" class="form-control" aria-label="category" name="category">
+            <select id="category" class="form-control dropdown" aria-label="category" name="category">
                 {% for category in categories %}
                 {% if p_request._category.category_id == category.category_id %}
                 <option value="{{ category.category_id }}" selected>{{ category.title }}</option>
@@ -44,7 +44,7 @@
             </select>
 
             <label>Status:</label>
-            <select id="status" class="form-control" aria-label="status" name="status">
+            <select id="status" class="form-control dropdown" aria-label="status" name="status">
                 {% if p_request.is_answered == 0 %}
                 <option value="0" selected>Not Answerd</option>
                 <option value="1">Answered</option>

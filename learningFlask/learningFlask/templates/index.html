@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
 
 {% block content %}
 
@@ -31,14 +31,14 @@
                 <input id="prayer-search-desc" type="text" class="form-control" placeholder="Prayer Request Description" name="searchDesc" />
             </div>
             <div class="col-sm-2">
-                <select class="form-control" aria-label="All" name="status">
+                <select class="form-control dropdown" aria-label="All" name="status">
                     <option value="1">All</option>
                     <option value="2">Answered</option>
                     <option value="3">Unanswered</option>
                 </select>
             </div>
             <div class="col-sm-2">
-                <select id="category" class="form-control" aria-label="category" name="category">
+                <select id="category" class="form-control dropdown" data-live-search="true" data-width="100%" aria-label="category" name="category">
                     <option value="">All</option>
                     {% for category in categories %}
                     <option value="{{ category.category_id }}">{{ category.title }}</option>
@@ -82,6 +82,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     var first_row = $("table > tbody > tr")[0].id;

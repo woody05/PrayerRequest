@@ -1,0 +1,122 @@
+{% extends "dashboardlayout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="header-row">
+        <div class="col-sm-7">
+            <div class="header-title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+        <div class="col-sm-5">
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="section-header">Unanswered Prayers</h4>
+            <div id="unanswered-list" class="unanswered-list dashboard-item"></div>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="section-header">Answered This Week.</h4>
+            <div id="answered-this-week" class="unanswered-list dashboard-item"></div>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="section-header">Recently Added</h4>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        UnansweredPrayers();
+        AnsweredThisWeek();
+        setInterval(function(){ UnansweredPrayers(); }, 5000);
+        setInterval(function(){ AnsweredThisWeek(); }, 5000);
+    });
+
+    function PopulateUnanswered(results) {
+        var unansweredList = $('#unanswered-list');
+        unansweredList.html('');
+
+        for (var p in results) {
+            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item"></div>');
+            var title = $('<span id="" class="result-item-code">'+ results[p].title +'</span>');
+            var date = $('<span id="" class="result-item-descrip">'+ results[p].date_added +'</span>');
+
+            resultItem.append(title);
+            resultItem.append(date);
+
+            unansweredList.append(resultItem);
+        }
+    }
+
+    function UnansweredPrayers() {
+        var url = "{{ url_for('apiUnansweredPrayerRequest') }}"
+        var data = '';
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                var jsonData = JSON.parse(jqXHR.responseText);
+                //console.log(jsonData);
+
+                PopulateUnanswered(jsonData);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('Aw shit it broke!');
+                consol.log(errorThrown);
+            },
+         });
+    }
+
+    function PopulateAnsweredThisWeek(results) {
+        var thisweek = $('#answered-this-week');
+        thisweek.html('');
+
+        for (var p in results) {
+            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item"></div>');
+            var title = $('<span id="" class="result-item-code">'+ results[p].title +'</span>');
+            var date = $('<span id="" class="result-item-descrip">'+ results[p].date_answered +'</span>');
+
+            resultItem.append(title);
+            resultItem.append(date);
+
+            thisweek.append(resultItem);
+        }
+    }
+
+    function AnsweredThisWeek() {
+        var url = "{{ url_for('answeredThisWeek') }}"
+        var data = '';
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                var jsonData = JSON.parse(jqXHR.responseText);
+                //console.log(jsonData);
+
+                PopulateAnsweredThisWeek(jsonData);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('Aw shit it broke!');
+                consol.log(errorThrown);
+            },
+         });
+    }
+
+</script>
+
+{% endblock %}

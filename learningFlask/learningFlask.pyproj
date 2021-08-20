@@ -49,6 +49,13 @@
     <Folder Include="learningFlask\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="learningFlask\static\content\bootstrap.css" />
+    <Content Include="learningFlask\static\content\bootstrap.min.css" />
+    <Content Include="learningFlask\static\content\dashboard.css" />
+    <Content Include="learningFlask\static\scripts\bootstrap.js" />
+    <Content Include="learningFlask\static\scripts\bootstrap.min.js" />
+    <Content Include="learningFlask\templates\dashboard.html" />
+    <Content Include="learningFlask\templates\dashboardlayout.html" />
     <Content Include="learningFlask\templates\signIn.html" />
     <Content Include="learningFlask\templates\createAccount.html" />
     <Content Include="learningFlask\templates\editPrayerRequest.html" />
@@ -56,16 +63,17 @@
     <Content Include="learningFlask\templates\deletePrayerRequest.html" />
     <Content Include="learningFlask\templates\addPrayerRequest.html" />
     <Content Include="learningFlask\templates\unansweredPrayerRequest.html" />
+    <Content Include="libman.json" />
     <Content Include="requirements.txt" />
-    <Content Include="learningFlask\static\content\bootstrap.css" />
-    <Content Include="learningFlask\static\content\bootstrap.min.css" />
+    <Content Include="learningFlask\static\content\oldbootstrap.css" />
+    <Content Include="learningFlask\static\content\oldbootstrap.min.css" />
     <Content Include="learningFlask\static\content\site.css" />
     <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="learningFlask\static\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="learningFlask\static\scripts\bootstrap.js" />
-    <Content Include="learningFlask\static\scripts\bootstrap.min.js" />
+    <Content Include="learningFlask\static\scripts\oldbootstrap.js" />
+    <Content Include="learningFlask\static\scripts\oldbootstrap.min.js" />
     <Content Include="learningFlask\static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="learningFlask\static\scripts\jquery-1.10.2.js" />
     <Content Include="learningFlask\static\scripts\jquery-1.10.2.min.js" />

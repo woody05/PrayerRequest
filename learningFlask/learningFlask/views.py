@@ -167,11 +167,6 @@ def unansweredPrayerRequest():
         prayer_requests = result,
     )
 
-@app.route('/api/unansweredPrayerRequest',methods = ['POST', 'GET'])
-def apiUnansweredPrayerRequest():
-    rowTable = prayer_request.unAnswered_prayer_request_datatables(request)
-    return jsonify(rowTable.output_result())
-
 
 @app.route('/about')
 def about():
@@ -196,3 +191,31 @@ def addPrayerRequestComment():
         comment.add_comment(newComment)
 
         return redirect(url_for('home'))
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template(
+        'dashboard.html',
+        title='Dash Board',
+        year=datetime.now().year,
+    )
+
+@app.route('/api/unansweredPrayerRequest',methods = ['POST', 'GET'])
+def apiUnansweredPrayerRequest():
+    result = prayer_request.unanswered_prayer_request().all()
+    prayer_request_schema = prayer_request.prayer_request_schema(many=True)
+    return prayer_request_schema.dumps(result)
+
+
+@app.route('/api/answeredThisWeek',methods = ['POST', 'GET'])
+def answeredThisWeek():
+    result = prayer_request.answered_this_week().all()
+    prayer_request_schema = prayer_request.prayer_request_schema(many=True)
+    return prayer_request_schema.dumps(result)
+
+
+@app.route('/api/categories',methods = ['POST', 'GET'])
+def apiCategories():
+    result = category.all_categories().all()
+    category_schema = category.category_schema(many=True)
+    return category_schema.dumps(result)

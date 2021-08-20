@@ -1,9 +1,10 @@
 
-from learningFlask import db
+from learningFlask import db, ma
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
+from marshmallow import fields
 
 Base = declarative_base()
 
@@ -17,6 +18,16 @@ class comments(db.Model):
 
     prayer_request_id = db.Column("Prayer_request_id", db.Integer, ForeignKey("prayer_request.Prayer_Request_id"))
     prayer_request = relationship("prayer_request", back_populates="comments")
+
+class comments_schema(ma.Schema):
+    class Meta:
+        model = comments
+        load_instance = True
+
+    comment_id = fields.Int()
+    _comment = fields.String()
+    date_added = fields.DateTime()
+    prayer_request_id = fields.Int()
 
 
 def comments_for_request(id):

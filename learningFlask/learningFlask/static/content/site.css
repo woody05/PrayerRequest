@@ -71,11 +71,14 @@ input[type="checkbox"].input-validation-error {
     margin: 3% 0;
 }
 
+.dropdown {
+    max-height: 100px;
+    overflow: auto;
+}
 
 /*
     End From Controls
 */
-
 .prayer-request-table tbody tr:hover {
     background-color: #D3D3D3;
 }
