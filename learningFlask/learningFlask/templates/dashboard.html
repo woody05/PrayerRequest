@@ -2,6 +2,23 @@
 
 {% block content %}
 
+<style>
+    .highlight-red{
+        background-color: red;
+        //color: #fff;
+    }
+
+    .highlight-yellow{
+        background-color: yellow;
+        //color: #fff;
+    }
+
+    .highlight-green{
+        background-color: greenyellow;
+
+    }
+</style>
+
 <div class="row">
     <div class="header-row">
         <div class="col-sm-7">
@@ -43,8 +60,31 @@
         var unansweredList = $('#unanswered-list');
         unansweredList.html('');
 
+        var highlight = '';
+
+        var today = Date.now();
+
         for (var p in results) {
-            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item"></div>');
+            var dateAdded = new Date(results[p].date_added);
+            var dateDiff = today - dateAdded;
+
+            var Difference_In_Days = dateDiff / (1000 * 3600 * 24);
+
+            console.log(results[p].title + ': ' + Difference_In_Days);
+
+            switch (true) {
+                case (Difference_In_Days > 14):
+                    highlight = 'highlight-red';
+                    break;
+                case (Difference_In_Days > 7):
+                    highlight = 'highlight-yellow';
+                    break;
+                default:
+                    highlight = '';
+                    break;
+            }
+
+            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item '+ highlight +'"></div>');
             var title = $('<span id="" class="result-item-code">'+ results[p].title +'</span>');
             var date = $('<span id="" class="result-item-descrip">'+ results[p].date_added +'</span>');
 
@@ -83,7 +123,7 @@
         thisweek.html('');
 
         for (var p in results) {
-            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item"></div>');
+            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item highlight-green"></div>');
             var title = $('<span id="" class="result-item-code">'+ results[p].title +'</span>');
             var date = $('<span id="" class="result-item-descrip">'+ results[p].date_answered +'</span>');
 
