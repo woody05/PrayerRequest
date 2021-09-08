@@ -3,23 +3,28 @@
 {% block content %}
 
 <style>
-    .highlight-red{
-        background-color: red;
-        //color: #fff;
+    .highlight-red {
+        background-color: #d9534f;
+        color: #fff;
     }
 
-    .highlight-yellow{
-        background-color: yellow;
-        //color: #fff;
+    .highlight-yellow {
+        background-color: #ffc107;
+        color: #fff;
     }
 
-    .highlight-green{
-        background-color: greenyellow;
+    .highlight-green {
+        background-color: #28a745;
+        color: #fff;
+    }
 
+    .highlight-blue {
+        background-color: #007bff;
+        color: #fff;
     }
 </style>
 
-<div class="row">
+<!--<div class="row">
     <div class="header-row">
         <div class="col-sm-7">
             <div class="header-title">
@@ -29,7 +34,7 @@
         <div class="col-sm-5">
         </div>
     </div>
-</div>
+</div>-->
 
 <div class="content">
     <div class="row">
@@ -73,14 +78,14 @@
             console.log(results[p].title + ': ' + Difference_In_Days);
 
             switch (true) {
-                case (Difference_In_Days > 14):
+                case (Difference_In_Days > 60):
                     highlight = 'highlight-red';
                     break;
-                case (Difference_In_Days > 7):
+                case (Difference_In_Days > 30):
                     highlight = 'highlight-yellow';
                     break;
                 default:
-                    highlight = '';
+                    highlight = 'highlight-blue';
                     break;
             }
 

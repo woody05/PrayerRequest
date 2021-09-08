@@ -45,6 +45,7 @@ def home():
         elif request.form['status'] == "3":
             _prayer_request = prayer_request.unanswered_prayer_request().filter(prayer_request.prayer_request.title.contains(search)).filter(prayer_request.prayer_request.description.contains(searchDesc)).filter(prayer_request.prayer_request.category_id.contains(category_id))
 
+    _prayer_request = _prayer_request.order_by(prayer_request.prayer_request.date_added.asc())
 
     """Renders the home page."""
     return render_template(

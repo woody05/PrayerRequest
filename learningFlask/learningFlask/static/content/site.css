@@ -79,6 +79,23 @@ input[type="checkbox"].input-validation-error {
 /*
     End From Controls
 */
+
+/*
+    Index table 
+*/
+
+.prayer-request-table tbody {
+    display: block;
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+    .prayer-request-table thead, .prayer-request-table tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
 .prayer-request-table tbody tr:hover {
     background-color: #D3D3D3;
 }

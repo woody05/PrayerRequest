@@ -45,7 +45,7 @@ def all_prayer_request():
     return result
 
 def unanswered_prayer_request():
-    data = prayer_request.query.filter_by(is_answered=0)
+    data = prayer_request.query.filter_by(is_answered=0).order_by(prayer_request.date_added.asc())
     return data
 
 

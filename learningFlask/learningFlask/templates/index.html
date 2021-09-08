@@ -68,7 +68,13 @@
                     {% for request in prayer_requests %}
                     <tr id="{{ request.prayer_request_id }}">
                         <td>{{ request.title }}</td>
-                        <td>{{ request.description }}</td>
+                        <td>
+                            {% if request.description|length > 30 %}
+                            {{ request.description[:30] + (request.description[30:] and '...') }}
+                            {% else %}
+                            {{ request.description }}
+                            {% endif %}
+                        </td>
                         {% if request.is_answered == 0 %}
                         <td class="unanswered">Unanswered</td>
                         {% else %}
