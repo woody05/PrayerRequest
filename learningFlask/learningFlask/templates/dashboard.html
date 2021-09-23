@@ -44,10 +44,11 @@
         </div>
         <div class="col-sm-4">
             <h4 class="section-header">Answered This Week.</h4>
-            <div id="answered-this-week" class="unanswered-list dashboard-item"></div>
+            <div id="answered-this-week" class="answered-this-week dashboard-item"></div>
         </div>
         <div class="col-sm-4">
             <h4 class="section-header">Recently Added</h4>
+            <div id="recently-added" class="recently-added dashboard-item"></div>
         </div>
     </div>
 </div>
@@ -57,8 +58,10 @@
     $(function () {
         UnansweredPrayers();
         AnsweredThisWeek();
+        RecentlyAdded();
         setInterval(function(){ UnansweredPrayers(); }, 5000);
         setInterval(function(){ AnsweredThisWeek(); }, 5000);
+        setInterval(function(){ RecentlyAdded(); }, 5000);
     });
 
     function PopulateUnanswered(results) {
@@ -153,6 +156,45 @@
                 //console.log(jsonData);
 
                 PopulateAnsweredThisWeek(jsonData);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                consol.log('Aw shit it broke!');
+                consol.log(errorThrown);
+            },
+         });
+    }
+
+    function PopulateRecentlyAdded(results) {
+        var thisweek = $('#recently-added');
+        thisweek.html('');
+
+        for (var p in results) {
+            var resultItem = $('<div id="' + results[p].prayer_request_id + '" class="result-item highlight-blue"></div>');
+            var title = $('<span id="" class="result-item-code">'+ results[p].title +'</span>');
+            var date = $('<span id="" class="result-item-descrip">'+ results[p].date_added +'</span>');
+
+            resultItem.append(title);
+            resultItem.append(date);
+
+            thisweek.append(resultItem);
+        }
+    }
+
+    function RecentlyAdded() {
+        var url = "{{ url_for('apiRecentlyAddedPrayerRequest') }}"
+        var data = '';
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                var jsonData = JSON.parse(jqXHR.responseText);
+                //console.log(jsonData);
+
+                PopulateRecentlyAdded(jsonData);
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

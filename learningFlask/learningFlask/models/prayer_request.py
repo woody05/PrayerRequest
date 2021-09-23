@@ -7,6 +7,7 @@ from . import comment,users, category
 from marshmallow import fields
 from datetime import datetime, timedelta
 #from datatables import ColumnDT, DataTables
+from dateutil.relativedelta import relativedelta
 
 Base = declarative_base()
 
@@ -48,6 +49,15 @@ def unanswered_prayer_request():
     data = prayer_request.query.filter_by(is_answered=0).order_by(prayer_request.date_added.asc())
     return data
 
+def recently_added_prayer_request():
+    unanswered = unanswered_prayer_request()
+    
+    now = datetime.now().date()
+    one_month_back = now - relativedelta(months=1)
+
+    data = unanswered.filter(db.func.date(prayer_request.date_added) >= one_month_back)
+
+    return data
 
 def answered_prayer_request():
     data = prayer_request.query.filter_by(is_answered=1)
@@ -68,12 +78,6 @@ def prayer_request_by_id(id):
     return result
 
 
-
-def remove_prayer_request(id):
-    result = prayer_request.query.filter_by(prayer_request_id=id).first()
-    db.session.delete(result)
-    db.session.commit()
-
 def update_prayer_request(updatedData):
     result = prayer_request.query.filter_by(prayer_request_id=updatedData.prayer_request_id).first()
     result.description = updatedData.description
@@ -92,7 +96,10 @@ def update_prayer_request(updatedData):
     print(result.date_added)
 
     db.session.commit()
-
+def remove_prayer_request(id):
+    result = prayer_request.query.filter_by(prayer_request_id=id).first()
+    db.session.delete(result)
+    db.session.commit()
 def add_prayer_request(title,description,person,category_id):
    newRequest = prayer_request()
    newRequest.title = title

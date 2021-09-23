@@ -150,3 +150,15 @@ input[type="checkbox"].input-validation-error {
 /*
     End Prayer Request comments sections
 */
+
+/*
+    View page 
+*/
+
+.view-title {
+    font-size: 1.6em;
+}
+
+.view-title-detail{
+    font-size: 2.8em;
+}

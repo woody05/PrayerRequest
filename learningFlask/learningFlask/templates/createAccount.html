@@ -24,7 +24,7 @@
     <div class="col-sm-4">
         <h4 class="section-header">Account Info</h4>
         <div class="input-row">
-            <input id="Email" class="form-control" name="Email" type="email" placeholder="Enter Email Address." />
+            <input id="email" class="form-control" name="email" type="email" placeholder="Enter Email Address." />
         </div>
         <div class="input-row">
             <input id="user-name" class="form-control" name="user-name" type="text" placeholder="Enter User Name." />
@@ -89,6 +89,42 @@
         var receiveEmails = $('#receiveEmails');
 
         receiveEmails.prop('checked', true);
+    });
+</script>
+
+<script>
+    //KAW going to post form.
+    $('#btn-add').click(function () {
+
+        //KAW collecting variables
+        var email = $("#email").val();
+        var user_name = $("#user-name").val();
+        var first_name = $("#first-name").val();
+        var last_name = $("#last-name").val();
+        var password = $("#password").val();
+
+        data = {
+            email: email,
+            user_name: user_name,
+            first_name: first_name,
+            last_name: last_name,
+            password: password,
+        };
+
+        var url = "{{ url_for('createAccount') }}"
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data, textStatus, jqXHR)
+            {
+                window.location.href = "{{ url_for('home') }}";
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log('aw shit it broke!');
+            },
+         });
     });
 </script>
 

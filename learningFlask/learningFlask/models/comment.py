@@ -40,3 +40,9 @@ def add_comment(newComment):
 
    db.session.add(commentToAdd)
    db.session.commit()
+
+def remove_comments(id):
+    result = comments.query.filter_by(prayer_request_id=id).all()
+    for comment in result:
+        db.session.delete(comment)
+    db.session.commit()

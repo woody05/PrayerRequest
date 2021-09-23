@@ -5,8 +5,9 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, redirect, url_for, request, jsonify
 from learningFlask import app
-from .models import prayer_request, category, comment
+from .models import prayer_request, category, comment, users
 from sqlalchemy.sql import text
+from flask import Blueprint
 
 
 @app.route('/signIn',methods = ['POST', 'GET'])
@@ -20,12 +21,24 @@ def signIn():
 
 @app.route('/createAccount',methods = ['POST', 'GET'])
 def createAccount():
-    return render_template(
-        'createAccount.html',
-        title='Create Account',
-        header='Create Account',
-        year=datetime.now().year,
-    )
+    if request.method == 'POST':
+        newUser = users.users()
+        newUser.email_address = request.form['email']
+        newUser.user_name = request.form['user_name']
+        newUser.first_name = request.form['first_name']
+        newUser.last_name = request.form['last_name']
+        newUser.password = request.form['password']
+
+        users.createUser(newUser)
+
+        return redirect(url_for('home'))
+    else:
+        return render_template(
+            'createAccount.html',
+            title='Create Account',
+            header='Create Account',
+            year=datetime.now().year,
+        )
 
 @app.route('/')
 @app.route('/home',methods = ['POST', 'GET'])
@@ -45,7 +58,7 @@ def home():
         elif request.form['status'] == "3":
             _prayer_request = prayer_request.unanswered_prayer_request().filter(prayer_request.prayer_request.title.contains(search)).filter(prayer_request.prayer_request.description.contains(searchDesc)).filter(prayer_request.prayer_request.category_id.contains(category_id))
 
-    _prayer_request = _prayer_request.order_by(prayer_request.prayer_request.date_added.asc())
+    _prayer_request = _prayer_request.order_by(prayer_request.prayer_request.date_added.desc())
 
     """Renders the home page."""
     return render_template(
@@ -82,7 +95,7 @@ def deletePrayerRequest(id):
       p_request = prayer_request.prayer_request_by_id(id)
       return render_template(
             'deletePrayerRequest.html',
-            title='Delete ',
+            title='Are you sure you want to delete ',
             year=datetime.now().year,
             url=url_for('removePrayerRequest'),
             p_request = p_request
@@ -108,7 +121,7 @@ def editPrayerRequest(id):
       categories = category.all_categories().all()
       return render_template(
             'editPrayerRequest.html',
-            title='Edit ',
+            title='Prayer Request',
             year=datetime.now().year,
             p_request = p_request,
             categories = categories
@@ -138,6 +151,9 @@ def updatePrayerRequest():
 def removePrayerRequest():
     if request.method == 'POST':
         id = request.form['id']
+        #KAW - removing comments for prayer request first. 
+        #      foreign key contraint
+        comment.remove_comments(id)
         prayer_request.remove_prayer_request(id)
         return redirect(url_for('home'))
     else:
@@ -207,6 +223,11 @@ def apiUnansweredPrayerRequest():
     prayer_request_schema = prayer_request.prayer_request_schema(many=True)
     return prayer_request_schema.dumps(result)
 
+@app.route('/api/recentlyAddedPrayerRequest',methods = ['POST', 'GET'])
+def apiRecentlyAddedPrayerRequest():
+    result = prayer_request.recently_added_prayer_request()
+    prayer_request_schema = prayer_request.prayer_request_schema(many=True)
+    return prayer_request_schema.dumps(result)
 
 @app.route('/api/answeredThisWeek',methods = ['POST', 'GET'])
 def answeredThisWeek():
