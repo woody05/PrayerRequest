@@ -39,6 +39,14 @@ hr {
 /*
     Form controls
 */
+.form-control {
+    border-radius: 0;
+}
+
+.btn{
+    border-radius: 0;
+}
+
 .field-validation-error {
     color: #b94a48;
 }
@@ -86,7 +94,7 @@ input[type="checkbox"].input-validation-error {
 
 .prayer-request-table tbody {
     display: block;
-    max-height: 450px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
