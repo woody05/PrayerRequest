@@ -15,15 +15,15 @@ class users(UserMixin, db.Model):
     email_address = db.Column("Email_address", db.Text)
     first_name = db.Column("First_name", db.Text)
     last_name = db.Column("Last_Name", db.Text)
-    password = db.column("Password", db.String(200))
+    password = db.Column("Password",db.VARCHAR(200))
 
     comments = relationship("comments", back_populates="users")
 
     def set_password(self, password):
        """Create hashed password."""
        self.password = generate_password_hash(
-           password,
-           method='sha256'
+          password,
+          method='sha256'
        )
 
     def check_password(self, password):
@@ -31,7 +31,7 @@ class users(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+       return '<User {}>'.format(self.user_name)
 
 def checkUserAccountExist(email):
     exist = users.query.filter_by(email_address = email).first()
