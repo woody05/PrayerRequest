@@ -15,7 +15,7 @@ class users(UserMixin, db.Model):
     email_address = db.Column("Email_address", db.Text)
     first_name = db.Column("First_name", db.Text)
     last_name = db.Column("Last_Name", db.Text)
-    password = db.column("Password", db.String(200))
+    password = db.Column("Password", db.String(200))
 
     comments = relationship("comments", back_populates="users")
 
