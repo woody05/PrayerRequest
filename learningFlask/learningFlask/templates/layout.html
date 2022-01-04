@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <!--<li><a href="{{ url_for('home') }}">Home</a></li>-->
                     <!--Display User Name if logged in. Not working yet. Have to figureout sessions with Python-->
-                    <li><a href="{{ url_for('dashboard') }}" id="dashboard" target="window">Dashboard</a></li>
+                    <li><a href="#" id="dashboard">Dashboard</a></li>
                     {% if false %}
                     <li><a href="{{ url_for('home') }}">Woody05</a></li>
                     {% else %}
@@ -54,5 +54,12 @@
     {% block scripts %}{% endblock %}
 
 </body>
+
+<script>
+    $('#dashboard').click(function () {
+        var url = "{{ url_for('dashboard') }}";
+        window.open(url);
+    });
+</script>
 
 </html>
